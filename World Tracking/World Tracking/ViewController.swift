@@ -22,20 +22,26 @@ class ViewController: UIViewController {
     }
 
     @IBAction func addAction(_ sender: Any) {
-        
+//        let cylinderNode = SCNNode(geometry: SCNCylinder(radius: 0.05, height: 0.05))
+//        cylinderNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+        let doorNode = SCNNode(geometry: SCNPlane(width: 0.03, height: 0.06))
+        doorNode.geometry?.firstMaterial?.diffuse.contents = UIColor.brown
+        let boxNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
+        boxNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
         let node = SCNNode()
 //        node.geometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.03)
 //        node.geometry = SCNCapsule(capRadius: 0.1, height: 0.3)
 //        node.geometry = SCNSphere(radius: 0.1)
 //        node.geometry  = SCNTube(innerRadius: 0.1, outerRadius: 0.2, height: 0.3)
-        node.geometry = SCNPlane(width: 0.2, height: 0.2)
+        node.geometry = SCNPyramid(width: 0.1, height: 0.1, length: 0.1)
         node.geometry?.firstMaterial?.specular.contents = UIColor.white
-        node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
-        let x = randomNumbers(firstNum: -0.3, secondNum: 0.3)
-        let y = randomNumbers(firstNum: -0.3, secondNum: 0.3)
-        let z = randomNumbers(firstNum: -0.3, secondNum: 0.3)
-        node.position = SCNVector3(0, 0, -0.3)
+        node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+        node.position = SCNVector3(0.2, 0.3, -0.2)
+        boxNode.position = SCNVector3(0,-0.05,0)
+        doorNode.position = SCNVector3(0,-0.02,0.055)
         self.sceneView.scene.rootNode.addChildNode(node)
+        node.addChildNode(boxNode)
+        boxNode.addChildNode(doorNode)
         self.sceneView.autoenablesDefaultLighting = true
     }
     
